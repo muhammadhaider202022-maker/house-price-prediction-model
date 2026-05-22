@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "app.py": {
+      "excludeFiles": [
+        ".venv/**",
+        ".venv-1/**",
+        "*.docx",
+        "house_price_prediction_prd.docx",
+        "models/test_house_price_model.joblib"
+      ]
+    }
+  }
+}

@@ -56,3 +56,13 @@ python -m src.predict --model models/house_price_model.joblib --sample "{\"sqft_
 ```
 
 If you need me to push it for you, please provide the GitHub repository URL or the repository name and I can add the remote and push it.
+
+## Vercel deployment
+
+This project now includes a Python entrypoint for Vercel:
+
+- `app.py` defines a WSGI `app` entrypoint
+- `pyproject.toml` sets `tool.vercel.entrypoint = "app:app"`
+- `vercel.json` excludes local virtual environments and test artifacts
+
+To deploy on Vercel, push the repository to GitHub and connect the repo in the Vercel dashboard. Vercel will use the `app.py` entrypoint and install dependencies from `pyproject.toml` or `requirements.txt`.
