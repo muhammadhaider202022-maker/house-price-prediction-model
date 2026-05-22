@@ -55,34 +55,4 @@ Or pass a JSON string directly:
 python -m src.predict --model models/house_price_model.joblib --sample "{\"sqft_living\": 2000, \"bedrooms\": 3, \"bathrooms\": 2, \"floors\": 1, \"zipcode\": \"98178\"}"
 ```
 
-## Use the model in Python
-
-```python
-from src.house_price_prediction import load_model, predict_samples
-
-pipeline = load_model("models/house_price_model.joblib")
-sample = {
-    "sqft_living": 2000,
-    "bedrooms": 3,
-    "bathrooms": 2,
-    "floors": 1,
-    "zipcode": "98178"
-}
-print(predict_samples(pipeline, [sample]))
-```
-
-## Notes
-
-- If you want to push this project to GitHub, initialize Git in the project folder and add a remote.
-- The model can be retrained with any CSV that contains a `price` column and other feature columns.
-
-## Push to GitHub
-
-If you already have a GitHub repository created, add its remote URL and push the commit:
-
-```powershell
-git remote add origin https://github.com/<your-username>/<your-repo>.git
-git push -u origin master
-```
-
 If you need me to push it for you, please provide the GitHub repository URL or the repository name and I can add the remote and push it.
