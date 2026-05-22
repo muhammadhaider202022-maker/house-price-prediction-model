@@ -14,7 +14,7 @@ This repository contains a house price regression pipeline built with `scikit-le
 1. Open PowerShell and go to the project folder:
 
 ```powershell
-cd "d:\house price prediction"
+cd "#file location of the project"
 ```
 
 2. Create and activate a virtual environment:
