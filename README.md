@@ -14,7 +14,7 @@ This repository contains a house price regression pipeline built with `scikit-le
 1. Open PowerShell and go to the project folder:
 
 ```powershell
-cd "#file location of the project"
+cd "d:\house price prediction"
 ```
 
 2. Create and activate a virtual environment:
@@ -41,6 +41,22 @@ python -m src.run_training --input data/sample_house_prices.csv --output models/
 
 This prints evaluation metrics including RMSE, MAE, and R².
 
+## Run the server locally
+
+Start the API locally with a helper script:
+
+```powershell
+python run_server.py
+```
+
+You can also customize the host and port:
+
+```powershell
+python run_server.py --host 0.0.0.0 --port 8000
+```
+
+Once running, use `/predict` as described below.
+
 ## Predict a sample
 
 Use the saved model to predict a single house sample from a JSON file:
@@ -66,3 +82,19 @@ This project now includes a Python entrypoint for Vercel:
 - `vercel.json` excludes local virtual environments and test artifacts
 
 To deploy on Vercel, push the repository to GitHub and connect the repo in the Vercel dashboard. Vercel will use the `app.py` entrypoint and install dependencies from `pyproject.toml` or `requirements.txt`.
+
+### Example Vercel request
+
+Once deployed, call the API with a GET request using a JSON-encoded `sample` query value:
+
+```bash
+curl "https://<your-vercel-app>.vercel.app/predict?sample={\"sqft_living\":2000,\"bedrooms\":3,\"bathrooms\":2,\"floors\":1,\"zipcode\":\"98178\"}"
+```
+
+Or send a POST request with JSON input:
+
+```bash
+curl -X POST "https://<your-vercel-app>.vercel.app/predict" \
+  -H "Content-Type: application/json" \
+  -d '{"sqft_living": 2000, "bedrooms": 3, "bathrooms": 2, "floors": 1, "zipcode": "98178"}'
+```

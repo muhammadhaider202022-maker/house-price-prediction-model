@@ -6,6 +6,13 @@ from src.house_price_prediction import load_json_sample, load_model, predict_sam
 
 BASE_DIR = os.path.dirname(__file__)
 MODEL_PATH = os.path.join(BASE_DIR, "models", "house_price_model.joblib")
+DEFAULT_SAMPLE_JSON = json.dumps({
+    "sqft_living": 2000,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "floors": 1,
+    "zipcode": "98178",
+})
 
 _cached_model = None
 
@@ -63,9 +70,11 @@ def app(environ, start_response):
                 query = parse_qs(environ.get("QUERY_STRING", ""))
                 sample_json = query.get("sample", [None])[0]
                 if sample_json is None:
-                    raise ValueError("Missing 'sample' query parameter with JSON payload")
+                    sample_json = DEFAULT_SAMPLE_JSON
             else:
                 sample_json = parse_request_body(environ)
+                if not sample_json.strip():
+                    sample_json = DEFAULT_SAMPLE_JSON
 
             sample = load_json_sample(sample_json)
             model = get_model()
